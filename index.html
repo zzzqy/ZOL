@@ -12,8 +12,8 @@
 				<div class="left">
 					<ul>
 						<li><a href="#">商城首页</a></li>
-						<li>Hi~欢迎来到Z商城，请<a href="#">登录</a></li>
-						<li><a href="#">免费注册</a></li>
+						<li>Hi~欢迎来到Z商城，请<a class="login" href="#">登录</a></li>
+						<li><a class="register" href="#">免费注册</a></li>
 					</ul>
 				</div>
 				<div class="right">
@@ -89,28 +89,28 @@
 			<div id="ltBtn"></div>
 			<div id="rtBtn"></div>
 			<ul>
-				<li><i class="icon-1"></i><a href="javascript:;">手机</a><span></span></li>
-				<li><i class="icon-2"></i><a href="javascript:;">电脑</a><span></span></li>
-				<li><i class="icon-3"></i><a href="javascript:;">DIY</a><span></span></li>
-				<li><i class="icon-4"></i><a href="javascript:;">数码</a><span></span></li>
-				<li><i class="icon-5"></i><a href="javascript:;">外设</a><span></span></li>
-				<li><i class="icon-6"></i><a href="javascript:;">智能</a><span></span></li>
+				<li class="list1"><i class="icon-1"></i><a href="javascript:;">手机</a><span></span></li>
+				<li class="list2"><i class="icon-2"></i><a href="javascript:;">电脑</a><span></span></li>
+				<li class="list3"><i class="icon-3"></i><a href="javascript:;">DIY</a><span></span></li>
+				<li class="list4"><i class="icon-4"></i><a href="javascript:;">数码</a><span></span></li>
+				<li class="list5"><i class="icon-5"></i><a href="javascript:;">外设</a><span></span></li>
+				<li class="list6"><i class="icon-6"></i><a href="javascript:;">智能</a><span></span></li>
 			</ul>			
 		</div>
-		<div class="subMenu">				
-			<ul>
-				<li>手机</li>
-				<li>移动电源</li>
-				<li>蓝牙耳机</li>
-				<li>手机贴膜</li>
-				<li>保护套</li>
-				<li>数据线</li>
-				<li>充电线</li>
-				<li>手机维修</li>
-			</ul>
-			<div class="img">
+		<div class="subMenu">
+			<!--<div>
+				<ul>
+					<li>手机</li>
+					<li>移动电源</li>
+					<li>蓝牙耳机</li>
+					<li>手机贴膜</li>
+					<li>保护套</li>
+					<li>数据线</li>
+					<li>充电线</li>
+					<li>手机维修</li>
+				</ul>
 				<img src="images/ChMkJ1p5VryIBoQ7AABckDBEB1sAAksGAAXwLIAAFyo173.jpg" alt="" />
-			</div>		
+			</div>-->
 		</div>
 		<!----------------------------------轻松省---------------------------------->
 		<div class="cont">
@@ -270,10 +270,32 @@
 		<script src="src/js/jquery-1.11.3.js"></script>
 		<script src="./src/js/tool.js"></script>
 		<script src="./src/js/main.js"></script>
+		<script src="src/js/111.js"></script>
 		<script>
 			window.onload = function(){
 				new Slider("banner_main");
 			}	
+			//二级菜单内容获取
+			$(function(){
+				$.getJSON("src/json/menu.json",function(data){					
+					for(var attr in data){
+						var oUl = document.createElement("ul");
+						for(var i = 0; i < data[attr].word.length;i++){
+							var oli = document.createElement("li");
+							oli.innerHTML = data[attr].word[i];
+							oUl.append(oli);
+						}
+						var oDiv = document.createElement("div");
+						$(oDiv).append(oUl);						
+						var oImg = `<img src="images/${data[attr].img}"/>`;
+						$(oDiv).append(oImg);
+						$(oDiv).addClass(attr);		
+						$(".subMenu").append(oDiv);
+					}
+					$(".subMenu div").css("display","none");
+				})
+				
+			})
 		</script>
 	</body>
 </html>

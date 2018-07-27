@@ -79,24 +79,20 @@ class Slider{
 		}
 	}
 }
-function time(due){
-	var currdata = new Date();
-	var due = new Date(due);
-	var timeLead = due.getTime() - currdata.getTime();
-	return timeLead;
-}
 function doubleNum(num){
 	if(num<10){
 		return "0" + num;
 	}
 	return num;
 }
-function timer(){
-	var data = time("2018/08/01");
-	var sec = doubleNum(parseInt(data/1000)%60);	
-	var min = doubleNum(parseInt(data/1000/60)%60);		
-	var hour = doubleNum(parseInt(data/1000/3600)%24);
-	var day = parseInt(data/1000/3600)%24%24;
+function timer(due){
+	var data = new Date();
+	var due = new Date(due);
+	var timeLead = due.getTime() - data.getTime();
+	var sec = doubleNum(parseInt(timeLead/1000)%60);	
+	var min = doubleNum(parseInt(timeLead/1000/60)%60);		
+	var hour = doubleNum(parseInt(timeLead/1000/3600)%24);
+	var day = parseInt(timeLead/1000/3600/24);
 	$(".pro_detail").each(function(){
 		$(this).find("span:eq(3)").html(sec);
 		$(this).find("span:eq(2)").html(min);
@@ -104,10 +100,3 @@ function timer(){
 		$(this).find("span:eq(0)").html(day);
 	})
 }
-timer();
-$(function(){
-	setInterval(function(data){
-		timer();
-		data--;
-	},1000)
-})

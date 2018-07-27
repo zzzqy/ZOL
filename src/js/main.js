@@ -1,4 +1,7 @@
-//二级菜单
+//登录注册
+
+
+//二级菜单移入移出
 $(function(){
 	$("#banner_main ul>li").each(function(){
 		$(this).hover(function(){
@@ -10,6 +13,8 @@ $(function(){
 				$(this).css("color","#4b4948");
 			})
 			$(".subMenu").show();
+			var list = this.className;			
+			$(".subMenu").find("."+list).css("display","block");
 			$(this).find(".icon-1").css("background-position","-37px 0px");
 			$(this).find(".icon-2").css("background-position","-30px -21px");			
 			$(this).find(".icon-3").css("background-position","-31px -133px");
@@ -26,29 +31,30 @@ $(function(){
 			$(this).find(".icon-4").css("background-position","0 -40px");
 			$(this).find(".icon-5").css("background-position","0 -62px");
 			$(this).find(".icon-6").css("background-position","0 -91px");
+			var list = this.className;			
+			$(".subMenu").find("."+list).css("display","none");
 		})
 	})
 })
 //划过按钮
 $(function(){
 	$("#banner_main #ltBtn").hover(function(){
-		$(this).css({backgorund:"url('../images/arrow.png') no-repeat 0 -95px","background-color":"#000",opacity:0.5})
+		$(this).css({"background-color":"#000",opacity:0.5})
 	},function(){
 		$(this).css({"background-color":"",opacity:1})
 	})
 })
 $(function(){
 	$("#banner_main #rtBtn").hover(function(){
-		$(this).css({backgorund:"url('../images/arrow.png') no-repeat 0 0 #000","background-color":"#000",opacity:0.5})
+		$(this).css({"background-color":"#000",opacity:0.5})
 	},function(){
 		$(this).css({"background-color":"",opacity:1})
 	})
 })
 //计时器
-//timer("2018-08-01");
-//$(function(){
-//	setInterval(function(data){
-//		timer("2018-08-01");
-//		data--;
-//	},1000)
-//})
+timer("2018/08/08");
+$(function(){
+	setInterval(function(){
+		timer("2018/08/08");
+	},1000)
+})
